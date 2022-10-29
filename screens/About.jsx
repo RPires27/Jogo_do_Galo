@@ -7,7 +7,7 @@ function About() {
       Projeto desenvolvido na disciplina de Programação
       para Dispositivos Móveis III.</Text>
       <Text style={styles.texto}>Feito por Rodrigo Pires.</Text>
-      <MaterialCommunityIcons name='github' style={styles.git} onPress={() =>{Linking.openURL("https://github.com/RPires27")}}></MaterialCommunityIcons>
+      <MaterialCommunityIcons name='github' style={styles.git} onPress={() =>{Linking.openURL("https://github.com/RPires27/Jogo_do_Galo")}}></MaterialCommunityIcons>
     </View>
     
   )
