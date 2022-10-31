@@ -2,11 +2,17 @@ import React, { Component, useEffect } from 'react'
 
 import { Pressable, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Alert, Button} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import HistoricoCardO from '../components/HistoricoCardO';
+import HistoricoCardX from '../components/HistoricoCardX';
+import history from '../components/history';
+
+
+
 
 
 
 export default class Jogo extends Component {
-
+  
     constructor(props){
         super(props);
         this.state = {
@@ -16,10 +22,15 @@ export default class Jogo extends Component {
             [0,0,0]
           ],
           jogadorAtual:1,
+
         }
       }
 
-    vencedor = () => {
+      
+
+      
+
+      vencedor = () => {
       const NUM_PECAS = 3
       var arr = this.state.gameState
       var soma
@@ -52,12 +63,8 @@ export default class Jogo extends Component {
       componentDidMount(){
        
       this.iniciarJogo()
-        
       }
-
-    
-     
-
+ 
       iniciarJogo = () =>{
         this.setState({gameState:
         [
@@ -69,11 +76,14 @@ export default class Jogo extends Component {
         } )
 
         this.setState({jogadorAtual:1})
+        
       }
 
      novoJogo = () =>{
 
         this.iniciarJogo()
+
+  
       }
 
       mudaCorTxt = () =>{
@@ -100,56 +110,60 @@ export default class Jogo extends Component {
         if(jogadorAtual == 1) return "X"
         else if(jogadorAtual == -1) return "O"
       }
-      
-
 
       tilePress = (linha, coluna)=>{
 
         var valor = this.state.gameState[linha][coluna]
+
         if(valor !== 0 ){return}
+
         var jogadorAtual = this.state.jogadorAtual
 
         var array = this.state.gameState.slice()
+
         array [linha][coluna] = jogadorAtual;
 
         this.setState({gameState: array})
-
 
         var proximoJogador = (jogadorAtual == 1) ? -1 : 1
 
         this.setState({jogadorAtual: proximoJogador})
 
-
         var vencedor = this.vencedor()
+
+        
+       
+        
+        
+       
+        
         if (vencedor == 1) {
           Alert.alert("O Jogador X venceu")
+          history.key = history.key + 1
           this.iniciarJogo()
+          history.historico.unshift(<HistoricoCardX key={history.key}></HistoricoCardX>)
         }
 
         if (vencedor == -1) {
           Alert.alert("O Jogador O venceu")
+          history.key = history.key + 1
           this.iniciarJogo()
+          history.historico.unshift(<HistoricoCardO key={history.key}></HistoricoCardO>)
         }
-
-        
       }
 
-      render_Icon = (linha, coluna) =>{
+        render_Icon = (linha, coluna) =>{
 
         var valor = this.state.gameState[linha][coluna]
 
         switch (valor) {
           case 1: return <MaterialCommunityIcons name='close' style = {styles.x}></MaterialCommunityIcons>
 
-        
           case -1: return <MaterialCommunityIcons name='circle-outline' style = {styles.o}></MaterialCommunityIcons>
 
-          default: return <View></View>
-            
-          
+          default: return <View></View>  
         }
       }
-
 
   render() {
     return (
@@ -188,8 +202,7 @@ export default class Jogo extends Component {
           {this.render_Icon(2,2)}
           </TouchableOpacity>
         </View>
-        <MaterialCommunityIcons name='replay' onPress={this.novoJogo} style={styles.replay}></MaterialCommunityIcons>
-    
+        <MaterialCommunityIcons name='replay' onPress={this.novoJogo} style={styles.replay}></MaterialCommunityIcons>  
       </View>
     )
   }

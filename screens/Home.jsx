@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Button, SafeAreaView,View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import Jogo from './Jogo'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Botao from '../components/Botao'
 
@@ -17,7 +16,9 @@ function Home() {
         <Botao texto="Jogar" onpress={() => {
         nav.navigate("Jogo");
       }}></Botao>
-      <Botao texto="Histórico"></Botao>
+      <Botao texto="Histórico" onpress={() => {
+        nav.navigate("Histórico");
+      }}></Botao>
 
         <MaterialCommunityIcons name = 'information-outline' style={styles.info} onPress={() => {nav.navigate("Sobre");}}></MaterialCommunityIcons>
         

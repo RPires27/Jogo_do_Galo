@@ -7,6 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from './screens/Home'
 import Jogo from './screens/Jogo'
+import Historico from './screens/Historico'
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
           <Stack.Screen name='Home' component={Home} options={{headerShown: false}}></Stack.Screen>
           <Stack.Screen name='Jogo' component={Jogo}></Stack.Screen>
           <Stack.Screen name='Sobre' component={About}></Stack.Screen>
+          <Stack.Screen name='Histórico' component={Historico}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     

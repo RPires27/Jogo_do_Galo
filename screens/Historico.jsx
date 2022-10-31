@@ -1,14 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { ScrollView, Text } from 'react-native'
+import history from '../components/history'
 
-const Historico = () => {
+function Historico() {
+
+
+  
   return (
-    <View>
-      <Text>Historico</Text>
-    </View>
+    <ScrollView>
+      {history.historico}
+    </ScrollView>
+
+
   )
 }
 
 export default Historico
-
-const styles = StyleSheet.create({})
