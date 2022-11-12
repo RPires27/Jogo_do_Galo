@@ -4,6 +4,7 @@ import { Pressable, SafeAreaView, StyleSheet, Text, View, TouchableOpacity, Aler
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import HistoricoCardO from '../components/HistoricoCardO';
 import HistoricoCardX from '../components/HistoricoCardX';
+import HistoricoEmpate from '../components/HistoricoEmpate';
 import history from '../components/history';
 
 
@@ -22,6 +23,8 @@ export default class Jogo extends Component {
             [0,0,0]
           ],
           jogadorAtual:1,
+
+          empate:0,
 
         }
       }
@@ -76,6 +79,7 @@ export default class Jogo extends Component {
         } )
 
         this.setState({jogadorAtual:1})
+        this.setState({empate:0})
         
       }
 
@@ -115,6 +119,10 @@ export default class Jogo extends Component {
 
         var valor = this.state.gameState[linha][coluna]
 
+        this.state.empate = this.state.empate + 1
+
+
+        
         if(valor !== 0 ){return}
 
         var jogadorAtual = this.state.jogadorAtual
@@ -149,6 +157,14 @@ export default class Jogo extends Component {
           history.key = history.key + 1
           this.iniciarJogo()
           history.historico.unshift(<HistoricoCardO key={history.key}></HistoricoCardO>)
+        }
+
+
+        if (this.state.empate == 9 && (vencedor != 1 && vencedor != -1 )) {
+          Alert.alert("Empate")
+          history.key = history.key + 1
+          this.iniciarJogo()
+          history.historico.unshift(<HistoricoEmpate key={history.key}></HistoricoEmpate>)
         }
       }
 
